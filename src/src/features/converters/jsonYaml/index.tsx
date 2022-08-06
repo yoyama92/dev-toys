@@ -9,15 +9,14 @@ import { InputEditor, OutputEditor } from './components/editor';
 import { Conversion, Indentation, Setting } from './types/configuration';
 import { convertValue } from './utils/converter';
 
-import { TitleComponent } from '@/components/title';
-
-const headerHeight = 210;
-
-const GridStyle = styled('div')(({}) => ({
-  height: `calc(100% - ${headerHeight}px)`,
-}));
+const headerHeight = 230;
 
 type Language = 'json' | 'yaml';
+
+const GridStyle = styled('div')(({ theme }) => ({
+  height: `calc(100% - ${headerHeight}px)`,
+  paddingTop: theme.spacing(1),
+}));
 
 const Main = () => {
   const defaultValue: Setting = {
@@ -81,43 +80,35 @@ const Main = () => {
 
   return (
     <GridStyle>
-      <Box sx={{ py: 2, height: '100%' }}>
-        <Box sx={{ my: 1, minWidth: '560px' }}>
-          <Configuration
-            defaultSetting={defaultValue}
-            onIndentationChanged={indentationChangedHandler}
-            onConversionChanged={conversionChangedHandler}
-          />
-        </Box>
-        <Grid container spacing={2} sx={{ my: 1, height: '100%' }}>
-          <Grid item xs={6} sx={{ height: '100%' }}>
-            <InputEditor
-              title="Input"
-              language={inputLanguage}
-              onChange={inputValueChangeHandler}
-            />
-          </Grid>
-          <Grid item xs={6} sx={{ height: '100%' }}>
-            <OutputEditor
-              title="Output"
-              language={outputLanguage}
-              ref={outputEditorRef}
-            />
-          </Grid>
-        </Grid>
+      <Box sx={{ my: 1, minWidth: '560px' }}>
+        <Configuration
+          defaultSetting={defaultValue}
+          onIndentationChanged={indentationChangedHandler}
+          onConversionChanged={conversionChangedHandler}
+        />
       </Box>
+      <Grid container spacing={2} sx={{ my: 1, height: '100%' }}>
+        <Grid item xs={6} sx={{ height: '100%' }}>
+          <InputEditor
+            title="Input"
+            language={inputLanguage}
+            onChange={inputValueChangeHandler}
+          />
+        </Grid>
+        <Grid item xs={6} sx={{ height: '100%' }}>
+          <OutputEditor
+            title="Output"
+            language={outputLanguage}
+            ref={outputEditorRef}
+          />
+        </Grid>
+      </Grid>
     </GridStyle>
   );
 };
 
 const JsonYaml = () => {
-  const title = 'Json <> Yaml Converter';
-  return (
-    <>
-      <TitleComponent title={title} />
-      <Main />
-    </>
-  );
+  return <Main />;
 };
 
 export { JsonYaml };

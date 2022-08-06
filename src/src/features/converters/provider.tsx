@@ -11,12 +11,14 @@ import { ToolProvider } from '@/types/toolProvider';
 
 export const provider: ToolProvider = {
   menu: 'Converters',
-  Icon: ({ fontSize, sx }) => <ChangeCircleIcon fontSize={fontSize} sx={sx} />,
+  title: '',
+  Icon: ChangeCircleIcon,
   link: '/converters',
   description: '',
   children: [
     {
       menu: 'JSON <> YAML',
+      title: 'Json <> Yaml Converter',
       Icon: TextSnippetIcon,
       element: <JsonYaml />,
       link: 'json-yaml',
@@ -24,6 +26,7 @@ export const provider: ToolProvider = {
     },
     {
       menu: 'Cron Parser',
+      title: 'Cron Parser',
       Icon: ScheduleIcon,
       element: <CronParser />,
       link: 'cron-parser',
@@ -31,6 +34,7 @@ export const provider: ToolProvider = {
     },
     {
       menu: 'Number Baser',
+      title: 'Number Base Converter',
       Icon: NumbersIcon,
       element: <NumberBaseConverter />,
       link: 'number-baser',

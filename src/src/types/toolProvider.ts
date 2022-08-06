@@ -9,6 +9,7 @@ export type ToolProvider = {
   menu: string;
   Icon: (props: IconProps) => JSX.Element;
   link: string;
+  title: string;
   description: string;
   element?: JSX.Element;
   children?: ToolProvider[];

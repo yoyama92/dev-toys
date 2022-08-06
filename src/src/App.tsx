@@ -8,6 +8,7 @@ import { createTheme, styled } from '@mui/material/styles';
 import urlJoin from 'url-join';
 
 import { DrawerComponent } from '@/components/drawer';
+import { TitleComponent } from '@/components/title';
 import { AllTools } from '@/features/allTools';
 import { provider as convertersProvider } from '@/features/converters/provider';
 import { ToolProvider } from '@/types/toolProvider';
@@ -25,10 +26,18 @@ const Main = styled('main')(({ theme }) => ({
   height: '100%',
 }));
 
-type RouterProps = Pick<ToolProvider, 'menu' | 'link' | 'element' | 'children'>;
+type RouterProps = Pick<
+  ToolProvider,
+  'menu' | 'link' | 'element' | 'children' | 'title'
+>;
+
+type HomeRouterProps = Pick<
+  ToolProvider,
+  'menu' | 'link' | 'element' | 'title'
+>;
 
 type MainComponentProps = {
-  home: RouterProps;
+  home: HomeRouterProps;
   routers: RouterProps[];
 };
 
@@ -36,17 +45,28 @@ const MainComponent = ({ home, routers }: MainComponentProps) => {
   return (
     <Main>
       <Routes>
-        <Route key={home.menu} path={home.link} element={home.element} />
+        <Route
+          key={home.menu}
+          path={home.link}
+          element={
+            <>
+              <TitleComponent title={home.title} />
+              {home.element}
+            </>
+          }
+        />
         {routers.map((router) => {
           return router.children ? (
             <Route key={router.menu} path={router.link}>
               {router.children.map((child) => {
+                const element = (
+                  <>
+                    <TitleComponent title={child.title} />
+                    {child.element}
+                  </>
+                );
                 return (
-                  <Route
-                    key={child.menu}
-                    path={child.link}
-                    element={child.element}
-                  />
+                  <Route key={child.menu} path={child.link} element={element} />
                 );
               })}
             </Route>
@@ -54,7 +74,12 @@ const MainComponent = ({ home, routers }: MainComponentProps) => {
             <Route
               key={router.menu}
               path={router.link}
-              element={router.element}
+              element={
+                <>
+                  <TitleComponent title={router.title} />
+                  {router.element}
+                </>
+              }
             />
           );
         })}
@@ -78,8 +103,10 @@ export const App = () => {
         })
       : [provider];
   });
+
   const allToolsProvider: ToolProvider = {
     menu: 'All tools',
+    title: 'All Tools',
     Icon: HomeIcon,
     element: <AllTools tools={flatToolProviders} />,
     link: '/',
