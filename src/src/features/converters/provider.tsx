@@ -26,7 +26,7 @@ export const provider: ToolProvider = {
     },
     {
       menu: 'Cron Parser',
-      title: 'Cron Parser',
+      title: 'Cron expression parser',
       Icon: ScheduleIcon,
       element: <CronParser />,
       link: 'cron-parser',

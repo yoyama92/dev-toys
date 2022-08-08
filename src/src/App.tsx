@@ -20,8 +20,8 @@ const Main = styled('main')(({ theme }) => ({
     easing: theme.transitions.easing.easeOut,
     duration: theme.transitions.duration.enteringScreen,
   }),
-  marginLeft: theme.spacing(5),
-  marginRight: theme.spacing(5),
+  marginLeft: theme.spacing(6),
+  marginRight: theme.spacing(6),
   paddingTop: theme.spacing(3),
   height: '100%',
 }));

@@ -9,7 +9,7 @@ import { InputEditor, OutputEditor } from './components/editor';
 import { Conversion, Indentation, Setting } from './types/configuration';
 import { convertValue } from './utils/converter';
 
-const headerHeight = 230;
+const headerHeight = 238;
 
 type Language = 'json' | 'yaml';
 
