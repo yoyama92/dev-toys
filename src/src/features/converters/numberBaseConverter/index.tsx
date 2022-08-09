@@ -31,7 +31,7 @@ const NumberBaseConverter = () => {
   );
 
   const [inputValue, setInputValue] = useState<ConvertedNumber>(
-    new ConvertedNumber(0),
+    new ConvertedNumber(),
   );
 
   const handleIsFormattedChange = (isFormatted: boolean) => {
