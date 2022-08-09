@@ -119,7 +119,7 @@ export const App = () => {
     },
   });
 
-  const drawerWidth = 240;
+  const drawerWidth = 200;
 
   return (
     <Router>

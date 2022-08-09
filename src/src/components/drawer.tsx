@@ -35,7 +35,11 @@ const NestedList = ({ value }: NestedListProps) => {
       {children ? (
         <>
           <ListItemButton onClick={handleClick} sx={{ py: '1' }}>
-            <ListItemIcon>
+            <ListItemIcon
+              sx={{
+                minWidth: 42,
+              }}
+            >
               <Icon />
             </ListItemIcon>
             <ListItemText primary={menu} />
@@ -51,8 +55,12 @@ const NestedList = ({ value }: NestedListProps) => {
                       sx={{ pl: 4, py: 0.5 }}
                       selected={location.pathname === path}
                     >
-                      <ListItemIcon>
-                        <child.Icon />
+                      <ListItemIcon
+                        sx={{
+                          minWidth: 36,
+                        }}
+                      >
+                        <child.Icon fontSize="small" />
                       </ListItemIcon>
                       <ListItemText primary={child.menu} />
                     </ListItemButton>
@@ -69,7 +77,11 @@ const NestedList = ({ value }: NestedListProps) => {
               sx={{ py: 1 }}
               selected={location.pathname === link}
             >
-              <ListItemIcon>
+              <ListItemIcon
+                sx={{
+                  minWidth: 42,
+                }}
+              >
                 <Icon />
               </ListItemIcon>
               <ListItemText primary={value.menu} />
