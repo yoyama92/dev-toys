@@ -21,7 +21,7 @@ const AllTools = ({ tools }: PageProps) => {
         return (
           <Grid item key={menu} sx={{ m: 1 }}>
             <NavLink to={link}>
-              <Card sx={{ maxWidth: 180, height: 240 }}>
+              <Card sx={{ maxWidth: 175, height: 240 }}>
                 <CardContent>
                   <Grid
                     container
@@ -33,7 +33,7 @@ const AllTools = ({ tools }: PageProps) => {
                       p: 3,
                     }}
                   >
-                    <Icon sx={{ fontSize: 48 }} />
+                    <Icon sx={{ fontSize: 38 }} />
                   </Grid>
                   <Typography>{menu}</Typography>
                   <Typography variant="body1" color="text.secondary">
