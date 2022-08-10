@@ -13,7 +13,7 @@ const isValid = (value: string) => {
 };
 
 export class Crontab {
-  #interval: CronExpression | undefined;
+  #interval?: CronExpression;
   constructor(value: string, includeSeconds: boolean) {
     if (isValid(value))
       this.#interval = cronPaser.parseExpression(
