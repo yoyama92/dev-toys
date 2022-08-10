@@ -2,14 +2,24 @@ import { useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
+import CloseIcon from '@mui/icons-material/Close';
+import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import {
+  Box,
   Collapse,
+  Dialog,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
   Divider,
   Drawer,
+  IconButton,
+  Link,
   List,
   ListItemButton,
   ListItemIcon,
   ListItemText,
+  Typography,
 } from '@mui/material';
 import urlJoin from 'url-join';
 
@@ -107,6 +117,71 @@ const DrawerContent = ({ values }: DrawerContentProps) => {
   );
 };
 
+type InformationDialogProps = {
+  open: boolean;
+  onClose: () => void;
+};
+
+const InformationDialog = (props: InformationDialogProps) => {
+  const { onClose, open } = props;
+
+  const handleClose = () => {
+    onClose();
+  };
+
+  const contentText = (
+    <Typography>
+      これは、
+      <Link href="https://devtoys.app" target="_blank" rel="noopener">
+        DevToys
+      </Link>
+      を模して作成したクローンアプリです。
+    </Typography>
+  );
+
+  return (
+    <Dialog onClose={handleClose} open={open}>
+      <DialogTitle>
+        Information
+        <IconButton
+          aria-label="close"
+          onClick={handleClose}
+          sx={{
+            position: 'absolute',
+            right: 8,
+            top: 8,
+            color: (theme) => theme.palette.grey[500],
+          }}
+        >
+          <CloseIcon />
+        </IconButton>
+      </DialogTitle>
+      <DialogContent>
+        <DialogContentText>{contentText}</DialogContentText>
+      </DialogContent>
+    </Dialog>
+  );
+};
+
+const Footer = () => {
+  const [open, setOpen] = useState(false);
+  const handleClick = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+  return (
+    <Box sx={{ position: 'absolute', bottom: 0, p: 2 }}>
+      <IconButton aria-label="info" onClick={handleClick}>
+        <HelpOutlineIcon />
+      </IconButton>
+      <InformationDialog open={open} onClose={handleClose} />
+    </Box>
+  );
+};
+
 type DrawerComponentProps = {
   home: ListItem;
   routers: ListItem[];
@@ -131,6 +206,7 @@ export const DrawerComponent = ({
       <DrawerContent values={[home]} />
       <Divider />
       <DrawerContent values={routers} />
+      <Footer />
     </Drawer>
   );
 };
