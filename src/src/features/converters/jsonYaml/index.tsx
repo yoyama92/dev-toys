@@ -9,13 +9,12 @@ import { InputEditor, OutputEditor } from './components/editor';
 import { Conversion, Indentation, Setting } from './types/configuration';
 import { convertValue } from './utils/converter';
 
-const headerHeight = 238;
+const headerHeight = 198;
 
 type Language = 'json' | 'yaml';
 
-const GridStyle = styled('div')(({ theme }) => ({
+const GridStyle = styled('div')(({}) => ({
   height: `calc(100% - ${headerHeight}px)`,
-  paddingTop: theme.spacing(1),
 }));
 
 const Main = () => {

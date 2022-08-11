@@ -12,11 +12,10 @@ import {
   GeneratedScheduleCount,
 } from './types/configuration';
 
-const headerHeight = 420;
+const headerHeight = 379;
 
-const GridStyle = styled('div')(({ theme }) => ({
+const GridStyle = styled('div')(({}) => ({
   height: `calc(100% - ${headerHeight}px)`,
-  paddingTop: theme.spacing(1),
 }));
 
 const CronParser = () => {

@@ -11,6 +11,7 @@ import { DrawerComponent } from '@/components/drawer';
 import { TitleComponent } from '@/components/title';
 import { AllTools } from '@/features/allTools';
 import { provider as convertersProvider } from '@/features/converters/provider';
+import { provider as encodersDecodersProvider } from '@/features/encodersDecoders/provider';
 import { ToolProvider } from '@/types/toolProvider';
 
 const Main = styled('main')(({ theme }) => ({
@@ -24,6 +25,11 @@ const Main = styled('main')(({ theme }) => ({
   marginRight: theme.spacing(6),
   paddingTop: theme.spacing(3),
   height: '100%',
+}));
+
+const Layout = styled('div')(({ theme }) => ({
+  paddingTop: theme.spacing(1),
+  height: `calc(100% - ${theme.spacing(4)})`,
 }));
 
 type RouterProps = Pick<
@@ -62,7 +68,7 @@ const MainComponent = ({ home, routers }: MainComponentProps) => {
                 const element = (
                   <>
                     <TitleComponent title={child.title} />
-                    {child.element}
+                    <Layout>{child.element}</Layout>
                   </>
                 );
                 return (
@@ -77,7 +83,7 @@ const MainComponent = ({ home, routers }: MainComponentProps) => {
               element={
                 <>
                   <TitleComponent title={router.title} />
-                  {router.element}
+                  <Layout>{router.element}</Layout>
                 </>
               }
             />
@@ -89,7 +95,10 @@ const MainComponent = ({ home, routers }: MainComponentProps) => {
 };
 
 export const App = () => {
-  const toolProviders: ToolProvider[] = [convertersProvider];
+  const toolProviders: ToolProvider[] = [
+    convertersProvider,
+    encodersDecodersProvider,
+  ];
   const flatToolProviders = toolProviders.flatMap((provider) => {
     return provider.children
       ? provider.children.map((child) => {
@@ -119,7 +128,7 @@ export const App = () => {
     },
   });
 
-  const drawerWidth = 200;
+  const drawerWidth = 240;
 
   return (
     <Router>
