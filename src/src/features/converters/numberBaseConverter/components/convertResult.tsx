@@ -15,13 +15,20 @@ import { ConvertedNumber } from '../classes/convertedNumber';
 import { Radix } from '../types/configuration';
 
 type NumberBaseConverterProps = {
-  value: ConvertedNumber;
+  value?: number;
   isFormatted: boolean;
 };
 
 type ConvertedValueComponentProps = {
   label: Radix;
   value: string;
+};
+
+const empty = (value?: string) => {
+  if (value && value.length > 0) {
+    return false;
+  }
+  return true;
 };
 
 const ConvertedValueComponent = ({
@@ -52,12 +59,15 @@ const ConvertedValueComponent = ({
           sx={{
             width: '100%',
             mr: 1,
-            height: 50,
+            height: 35,
             display: 'flex',
             alignItems: 'end',
           }}
         >
-          <FormControl sx={{ flexGrow: 1, p: 1, width: '100%' }} size="small">
+          <FormControl
+            sx={{ flexGrow: 1, p: 1, py: 0.5, width: '100%' }}
+            size="small"
+          >
             <Input readOnly value={value} />
           </FormControl>
         </Card>
@@ -68,14 +78,18 @@ const ConvertedValueComponent = ({
           placement="top-end"
           leaveDelay={1000}
         >
-          <Button onClick={handleCopyButtonClick} sx={{ p: 0 }}>
+          <Button
+            onClick={handleCopyButtonClick}
+            disabled={empty(value)}
+            sx={{ p: 0, minWidth: 35 }}
+          >
             <Card
               sx={{
-                px: 2,
+                px: 1,
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                height: 50,
+                height: 35,
               }}
             >
               <ContentCopyIcon />
@@ -88,10 +102,11 @@ const ConvertedValueComponent = ({
 };
 
 const ConvertResult = ({ value, isFormatted }: NumberBaseConverterProps) => {
-  const hexadecimal = value.getHexadecimal(isFormatted);
-  const decimal = value.getDecimal(isFormatted);
-  const octal = value.getOctal(isFormatted);
-  const binary = value.getBinary(isFormatted);
+  const convertedValue = new ConvertedNumber(value);
+  const hexadecimal = convertedValue.getHexadecimal(isFormatted);
+  const decimal = convertedValue.getDecimal(isFormatted);
+  const octal = convertedValue.getOctal(isFormatted);
+  const binary = convertedValue.getBinary(isFormatted);
   return (
     <>
       <ConvertedValueComponent label={'Hexadecimal'} value={hexadecimal} />
