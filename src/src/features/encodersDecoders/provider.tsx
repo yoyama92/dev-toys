@@ -13,7 +13,7 @@ export const provider: ToolProvider = {
   menu: 'Encoders / Decoders',
   title: '',
   Icon: ClosedCaptionOffIcon,
-  link: '/converters',
+  link: '/endecoders',
   description: '',
   children: [
     {
