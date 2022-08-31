@@ -14,6 +14,7 @@ import { provider as convertersProvider } from '@/features/converters/provider';
 import { provider as encodersDecodersProvider } from '@/features/encodersDecoders/provider';
 import { provider as formattersProvider } from '@/features/formatters/provider';
 import { provider as generatorsProvider } from '@/features/generators/provider';
+import { provider as textProvider } from '@/features/text/provider';
 import { ToolProvider } from '@/types/toolProvider';
 
 const Main = styled('main')(({ theme }) => ({
@@ -102,6 +103,7 @@ export const App = () => {
     encodersDecodersProvider,
     formattersProvider,
     generatorsProvider,
+    textProvider,
   ];
   const flatToolProviders = toolProviders.flatMap((provider) => {
     return provider.children

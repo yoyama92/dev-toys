@@ -3,6 +3,7 @@ import { NavLink, useLocation } from 'react-router-dom';
 
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
 import CloseIcon from '@mui/icons-material/Close';
+import GitHubIcon from '@mui/icons-material/GitHub';
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import {
   Box,
@@ -20,6 +21,7 @@ import {
   ListItemIcon,
   ListItemText,
   Typography,
+  useTheme,
 } from '@mui/material';
 import urlJoin from 'url-join';
 
@@ -173,9 +175,16 @@ const Footer = () => {
     setOpen(false);
   };
   return (
-    <Box sx={{ position: 'absolute', bottom: 0, p: 2 }}>
+    <Box sx={{ p: 1 }}>
       <IconButton aria-label="info" onClick={handleClick}>
         <HelpOutlineIcon />
+      </IconButton>
+      <IconButton
+        aria-label="info"
+        target="_blank"
+        href="https://github.com/yoyama92/dev-toys"
+      >
+        <GitHubIcon />
       </IconButton>
       <InformationDialog open={open} onClose={handleClose} />
     </Box>
@@ -201,12 +210,32 @@ export const DrawerComponent = ({
       boxSizing: 'border-box',
     },
   };
+
+  const theme = useTheme();
   return (
     <Drawer sx={drawerSx} variant="persistent" anchor="left" open={true}>
-      <DrawerContent values={[home]} />
-      <Divider />
+      <Box
+        sx={{
+          position: 'sticky',
+          top: 0,
+          zIndex: 1,
+          bgcolor: theme.palette.background.default,
+        }}
+      >
+        <DrawerContent values={[home]} />
+        <Divider />
+      </Box>
       <DrawerContent values={routers} />
-      <Footer />
+      <Box
+        sx={{
+          position: 'sticky',
+          bottom: 0,
+          bgcolor: theme.palette.background.default,
+        }}
+      >
+        <Divider />
+        <Footer />
+      </Box>
     </Drawer>
   );
 };
