@@ -5,6 +5,8 @@ import TitleIcon from '@mui/icons-material/Title';
 import VerifiedIcon from '@mui/icons-material/Verified';
 import { Typography } from '@mui/material';
 
+import { RegexTester } from './regexTester';
+
 import { ToolProvider } from '@/types/toolProvider';
 const element = <Typography>作成中</Typography>;
 
@@ -27,7 +29,7 @@ export const provider: ToolProvider = {
       menu: 'Regex Tester',
       title: 'Regex Tester',
       Icon: VerifiedIcon,
-      element: element,
+      element: <RegexTester />,
       link: 'regex',
       description: 'Validate and test regular expressions',
     },
