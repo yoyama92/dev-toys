@@ -5,6 +5,8 @@ import LinkIcon from '@mui/icons-material/Link';
 import SettingsIcon from '@mui/icons-material/Settings';
 import { Typography } from '@mui/material';
 
+import { JwtDecoder } from './jwtDecoder';
+
 import { ToolProvider } from '@/types/toolProvider';
 
 const element = <Typography>作成中</Typography>;
@@ -46,7 +48,7 @@ export const provider: ToolProvider = {
       menu: 'JWT Decoder',
       title: 'JWT Decoder',
       Icon: SettingsIcon,
-      element: element,
+      element: <JwtDecoder />,
       link: 'jwt-decoder',
       description: 'Decode a JWT header, payload and signature',
     },
