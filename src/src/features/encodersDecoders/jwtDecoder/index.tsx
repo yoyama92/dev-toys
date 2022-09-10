@@ -20,10 +20,10 @@ const Main = () => {
 
   return (
     <GridStyle>
-      <Box sx={{ my: 1, minWidth: '560px' }}>
+      <Box sx={{ my: 1 }}>
         <JwtTokenInput onChange={handleChange} />
       </Box>
-      <Box sx={{ mt: 3, minWidth: '560px', height: '100%' }}>
+      <Box sx={{ mt: 3, height: '100%' }}>
         <DecodeResult value={inputValue} />
       </Box>
     </GridStyle>
