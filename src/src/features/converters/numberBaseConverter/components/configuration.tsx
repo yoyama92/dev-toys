@@ -34,7 +34,9 @@ export const Configuration = ({
   onInputTypeChanged,
 }: ConfigurationProps) => {
   const { isFormatted, inputType } = defaultValue;
-  const [formatNumberLabel, setFormatNumberLabel] = useState('');
+  const [formatNumberLabel, setFormatNumberLabel] = useState(
+    isFormatted ? 'On' : 'Off',
+  );
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const checked = event.target.checked;
