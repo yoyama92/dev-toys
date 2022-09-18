@@ -176,7 +176,7 @@ const Options = ({ defaultValue, onOptionChanged }: OptionProps) => {
 
   return (
     <>
-      <OptionComponent title="Count" summary="Amout of generating password">
+      <OptionComponent title="Count" summary="Amout of password">
         <Input
           defaultValue={count}
           onChange={handleCountChanged}
