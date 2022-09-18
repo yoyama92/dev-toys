@@ -1,8 +1,11 @@
 import CheckIcon from '@mui/icons-material/Check';
 import CreateIcon from '@mui/icons-material/Create';
+import KeyIcon from '@mui/icons-material/Key';
 import PermDeviceInformationIcon from '@mui/icons-material/PermDeviceInformation';
 import TagIcon from '@mui/icons-material/Tag';
 import { Typography } from '@mui/material';
+
+import { Password } from './password';
 
 import { ToolProvider } from '@/types/toolProvider';
 const element = <Typography>作成中</Typography>;
@@ -37,6 +40,14 @@ export const provider: ToolProvider = {
       element: element,
       link: 'checksum',
       description: 'Generate a hash with Checksum based on a file',
+    },
+    {
+      menu: 'Password',
+      title: 'Password Generator',
+      Icon: KeyIcon,
+      element: <Password />,
+      link: 'password',
+      description: 'Generate a lot of passwords',
     },
   ],
 };
