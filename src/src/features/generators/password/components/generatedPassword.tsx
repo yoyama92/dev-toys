@@ -27,7 +27,6 @@ const GeneratedPassword = ({ values }: PasswordProps) => {
               sx={{
                 m: 1,
                 px: 1,
-                py: 0.5,
                 width: '100%',
               }}
             >
@@ -35,7 +34,6 @@ const GeneratedPassword = ({ values }: PasswordProps) => {
                 sx={{
                   width: '100%',
                 }}
-                size="small"
               >
                 <Input readOnly disableUnderline value={value} />
               </FormControl>
