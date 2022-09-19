@@ -7,7 +7,7 @@ import { Configuration } from './components/configuration';
 import { GeneratedPassword } from './components/generatedPassword';
 import { Configurations } from './types/configuration';
 
-const headerHeight = 700;
+const headerHeight = 470;
 
 const GridStyle = styled('div')(({}) => ({
   height: `calc(100% - ${headerHeight}px)`,
