@@ -104,7 +104,7 @@ const Options = ({ defaultValue, onOptionChanged }: OptionProps) => {
 
   const [option, setOption] = useState(defaultValue);
 
-  const handleLenghtChanged = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleLengthChanged = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
     if (!Number.isNaN(parseInt(value))) {
       setOption({
@@ -207,10 +207,10 @@ const Options = ({ defaultValue, onOptionChanged }: OptionProps) => {
           sx={{ px: 1 }}
         />
       </OptionComponent>
-      <OptionComponent title="Lenght" summary="Length of password">
+      <OptionComponent title="Length" summary="Length of password">
         <Input
           defaultValue={length}
-          onChange={handleLenghtChanged}
+          onChange={handleLengthChanged}
           sx={{ px: 1 }}
         />
       </OptionComponent>
