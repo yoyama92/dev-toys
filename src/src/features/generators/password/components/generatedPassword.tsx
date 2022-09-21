@@ -21,9 +21,8 @@ const GeneratedPassword = ({ values }: PasswordProps) => {
       <Typography variant="subtitle1">Generated Password</Typography>
       {values.map((value, index) => {
         return (
-          <Box>
+          <Box key={`${index}-${value}`}>
             <Card
-              key={`${index}-${value}`}
               sx={{
                 m: 1,
                 px: 1,
