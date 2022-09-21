@@ -69,17 +69,34 @@ const OptionComponent = ({
 
 type SwitchProps = {
   label?: string;
+  disabled?: boolean;
   defaultChecked: boolean;
-  onChange: (
-    event: React.ChangeEvent<HTMLInputElement>,
-    checked: boolean,
-  ) => void;
+  onChange: (checked: boolean) => void;
 };
 
 const SwitchComponent = (props: SwitchProps) => {
-  const { label, defaultChecked, onChange } = props;
+  const { label, disabled, defaultChecked, onChange } = props;
+
+  const [checked, setChecked] = useState<boolean>(defaultChecked);
+
+  useEffect(() => {
+    onChange(checked);
+  }, [checked]);
+
+  const handleOnChange = (
+    event: ChangeEvent<HTMLInputElement>,
+    checked: boolean,
+  ) => {
+    setChecked(checked);
+  };
+
+  // チェックが入っている場合のみ非活性にできる。
   const control = (
-    <Checkbox defaultChecked={defaultChecked} onChange={onChange} />
+    <Checkbox
+      checked={checked}
+      onChange={handleOnChange}
+      disabled={disabled && checked}
+    />
   );
   return (
     <FormControlLabel
@@ -134,60 +151,42 @@ const Options = ({ defaultValue, onOptionChanged }: OptionProps) => {
     }
   };
 
-  const handleNumbersChanged = (
-    event: ChangeEvent<HTMLInputElement>,
-    checked: boolean,
-  ) => {
+  const handleNumbersChanged = (checked: boolean) => {
     setOption({
       ...option,
       numbers: checked,
     });
   };
 
-  const handleSymbolsChanged = (
-    event: ChangeEvent<HTMLInputElement>,
-    checked: boolean,
-  ) => {
+  const handleSymbolsChanged = (checked: boolean) => {
     setOption({
       ...option,
       symbols: checked,
     });
   };
 
-  const handleLowercaseChanged = (
-    event: ChangeEvent<HTMLInputElement>,
-    checked: boolean,
-  ) => {
+  const handleLowercaseChanged = (checked: boolean) => {
     setOption({
       ...option,
       lowercase: checked,
     });
   };
 
-  const handleUppercaseChanged = (
-    event: ChangeEvent<HTMLInputElement>,
-    checked: boolean,
-  ) => {
+  const handleUppercaseChanged = (checked: boolean) => {
     setOption({
       ...option,
       uppercase: checked,
     });
   };
 
-  const handleExcludeSimilarCharactersChanged = (
-    event: ChangeEvent<HTMLInputElement>,
-    checked: boolean,
-  ) => {
+  const handleExcludeSimilarCharactersChanged = (checked: boolean) => {
     setOption({
       ...option,
       excludeSimilarCharacters: checked,
     });
   };
 
-  const handleStrictChanged = (
-    event: ChangeEvent<HTMLInputElement>,
-    checked: boolean,
-  ) => {
+  const handleStrictChanged = (checked: boolean) => {
     setOption({
       ...option,
       strict: checked,
@@ -197,6 +196,13 @@ const Options = ({ defaultValue, onOptionChanged }: OptionProps) => {
   useEffect(() => {
     onOptionChanged(option);
   }, [option]);
+
+  // 使う文字種別が1つのときはチェックを外せないようにする。
+  const typeOfCharactors = (() => {
+    const { numbers, symbols, lowercase, uppercase } = option;
+    return [numbers, symbols, lowercase, uppercase].filter((d) => d).length;
+  })();
+  const hasOnlyOneCharactors = typeOfCharactors === 1;
 
   return (
     <>
@@ -218,21 +224,25 @@ const Options = ({ defaultValue, onOptionChanged }: OptionProps) => {
         <SwitchComponent
           label="Numbers"
           defaultChecked={numbers}
+          disabled={hasOnlyOneCharactors}
           onChange={handleNumbersChanged}
         />
         <SwitchComponent
           label="Symbols"
           defaultChecked={symbols}
+          disabled={hasOnlyOneCharactors}
           onChange={handleSymbolsChanged}
         />
         <SwitchComponent
           label="Lowercase"
           defaultChecked={lowercase}
+          disabled={hasOnlyOneCharactors}
           onChange={handleLowercaseChanged}
         />
         <SwitchComponent
           label="Uppercase"
           defaultChecked={uppercase}
+          disabled={hasOnlyOneCharactors}
           onChange={handleUppercaseChanged}
         />
       </OptionComponent>
