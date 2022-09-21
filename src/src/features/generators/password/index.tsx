@@ -47,17 +47,23 @@ const Main = () => {
       exclude,
       strict,
     } = configuration;
-    const values = generator.generateMultiple(count, {
-      length: length,
-      numbers: numbers,
-      symbols: symbols,
-      lowercase: lowercase,
-      uppercase: uppercase,
-      excludeSimilarCharacters: excludeSimilarCharacters,
-      exclude: exclude,
-      strict: strict,
-    });
-    setPasswords(values);
+
+    try {
+      const values = generator.generateMultiple(count, {
+        length: length,
+        numbers: numbers,
+        symbols: symbols,
+        lowercase: lowercase,
+        uppercase: uppercase,
+        excludeSimilarCharacters: excludeSimilarCharacters,
+        exclude: exclude,
+        strict: strict,
+      });
+      setPasswords(values);
+    } catch (error) {
+      setPasswords([]);
+      console.error(error);
+    }
   }, [configuration]);
 
   return (
