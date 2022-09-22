@@ -49,6 +49,10 @@ const Main = () => {
     } = configuration;
 
     try {
+      if (length === 0) {
+        setPasswords([]);
+        return;
+      }
       const values = generator.generateMultiple(count, {
         length: length,
         numbers: numbers,
