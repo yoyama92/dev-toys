@@ -35,7 +35,7 @@ type NestedListProps = {
 
 const NestedList = ({ value }: NestedListProps) => {
   const location = useLocation();
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
 
   const handleClick = () => {
     setOpen(!open);
