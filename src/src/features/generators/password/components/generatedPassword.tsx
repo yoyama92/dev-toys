@@ -38,9 +38,8 @@ const PasswordComponent = ({ value }: { value: string }) => {
     <Tooltip open={isOpened} arrow title="Copied!" placement="top-start">
       <Card
         sx={{
-          m: 1,
+          my: 1,
           px: 1,
-          width: '100%',
         }}
         onClick={handleOnClick}
       >

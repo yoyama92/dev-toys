@@ -1,4 +1,4 @@
-import { ChangeEvent, ReactNode, useEffect, useState } from 'react';
+import { ChangeEvent, ReactNode, useState } from 'react';
 
 import {
   Box,
@@ -13,7 +13,9 @@ import {
   Typography,
 } from '@mui/material';
 
-import { Configurations } from '../types/configuration';
+import { Configurations, equalsConfigurations } from '../types/configuration';
+
+import { useDidUpdateEffect } from '@/utils/useDidUpdateEffect';
 
 type ConfigurationProps = {
   defaultValue: Configurations;
@@ -76,10 +78,9 @@ type SwitchProps = {
 
 const SwitchComponent = (props: SwitchProps) => {
   const { label, disabled, defaultChecked, onChange } = props;
-
   const [checked, setChecked] = useState<boolean>(defaultChecked);
 
-  useEffect(() => {
+  useDidUpdateEffect(() => {
     onChange(checked);
   }, [checked]);
 
@@ -93,7 +94,7 @@ const SwitchComponent = (props: SwitchProps) => {
   // チェックが入っている場合のみ非活性にできる。
   const control = (
     <Checkbox
-      checked={checked}
+      defaultChecked={checked}
       onChange={handleOnChange}
       disabled={disabled && checked}
     />
@@ -121,15 +122,21 @@ const Options = ({ defaultValue, onOptionChanged }: OptionProps) => {
 
   const [option, setOption] = useState(defaultValue);
 
+  const setOptionIfChanged = (newOption: Configurations) => {
+    if (!equalsConfigurations(option, newOption)) {
+      setOption(newOption);
+    }
+  };
+
   const handleLengthChanged = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
     if (!Number.isNaN(parseInt(value))) {
-      setOption({
+      setOptionIfChanged({
         ...option,
         length: parseInt(value),
       });
     } else {
-      setOption({
+      setOptionIfChanged({
         ...option,
         length: 0,
       });
@@ -139,12 +146,12 @@ const Options = ({ defaultValue, onOptionChanged }: OptionProps) => {
   const handleCountChanged = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
     if (!Number.isNaN(parseInt(value))) {
-      setOption({
+      setOptionIfChanged({
         ...option,
         count: parseInt(value),
       });
     } else {
-      setOption({
+      setOptionIfChanged({
         ...option,
         count: 0,
       });
@@ -152,48 +159,48 @@ const Options = ({ defaultValue, onOptionChanged }: OptionProps) => {
   };
 
   const handleNumbersChanged = (checked: boolean) => {
-    setOption({
+    setOptionIfChanged({
       ...option,
       numbers: checked,
     });
   };
 
   const handleSymbolsChanged = (checked: boolean) => {
-    setOption({
+    setOptionIfChanged({
       ...option,
       symbols: checked,
     });
   };
 
   const handleLowercaseChanged = (checked: boolean) => {
-    setOption({
+    setOptionIfChanged({
       ...option,
       lowercase: checked,
     });
   };
 
   const handleUppercaseChanged = (checked: boolean) => {
-    setOption({
+    setOptionIfChanged({
       ...option,
       uppercase: checked,
     });
   };
 
   const handleExcludeSimilarCharactersChanged = (checked: boolean) => {
-    setOption({
+    setOptionIfChanged({
       ...option,
       excludeSimilarCharacters: checked,
     });
   };
 
   const handleStrictChanged = (checked: boolean) => {
-    setOption({
+    setOptionIfChanged({
       ...option,
       strict: checked,
     });
   };
 
-  useEffect(() => {
+  useDidUpdateEffect(() => {
     onOptionChanged(option);
   }, [option]);
 
