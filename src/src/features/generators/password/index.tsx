@@ -28,11 +28,6 @@ const Main = () => {
 
   const [configuration, setConfigration] =
     useState<Configurations>(defaultConfigration);
-
-  const handleConfigrationChanged = (value: Configurations) => {
-    setConfigration(value);
-  };
-
   const [passwords, setPasswords] = useState<string[]>([]);
 
   useEffect(() => {
@@ -69,6 +64,10 @@ const Main = () => {
       console.error(error);
     }
   }, [configuration]);
+
+  const handleConfigrationChanged = (value: Configurations) => {
+    setConfigration(value);
+  };
 
   return (
     <GridStyle>
